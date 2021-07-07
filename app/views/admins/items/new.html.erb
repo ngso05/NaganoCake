@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h2 class="head-line title_h2 text-center">商品新規登録</h2>
+    <!-- form_with部分 -->
+    <%= form_with model:@items, local:true do |f| %>
+
+  <h4>商品名</h4>
+  <%= f.text_field :name %>
+
+  <h4>商品説明</h4>
+  <%= f.text_area :introduction %>
+
+  <div class="field">
+    <%= f.label :genre_id, "ジャンル" %>
+    <%= f.select :genre_id, ['ケーキ', 'プリン', '焼き菓子', 'キャンディー'], {include_blank: '---'} %>
+  </div>
+  
+  <h4>税抜価格</h4>
+  <%= f.text_field :price %>円<br>
+
+  <%= f.submit '新規登録' %>
+
+<% end %>
+  </div>
+</div>
