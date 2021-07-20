@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+  <h2>商品詳細</h2>
+  <div id="img_field">
+    <%= attachment_image_tag(@item, :image, size: "300x220", fallback: "no-image.jpg") %>
+    <div class="field">
+      <p>商品名          <%= @item.name %></p><br>
+    </div>
+    <div class="field">
+      <p>商品説明          <%= @item.introduction %></p><br>
+    </div>
+    <div class="field">
+      <p>ジャンル          <%= @item.genre.name %></p><br>
+    </div>
+    <div class="field">
+      <p>税込価格          <%= (@item.price*1.1).to_s(:delimited, delimiter: ",") %>(<%= @item.price.to_s(:delimited, delimiter: ",") %>) 円<br>
+         (税抜価格)
+      </p><br>
+		</div>
+		<div class="field">
+		  <p>販売ステータス          <%= @item.is_active %></p>
+		</div>
+		<%= link_to "編集する", edit_admins_item_path(@item), class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
+  </div>
+</div>
+

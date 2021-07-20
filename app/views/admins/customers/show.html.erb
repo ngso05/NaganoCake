@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <h2><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h2>
+    <div class="field">
+      <p>会員ID          <%= @customer.id %></p><br>
+    </div>
+    <div class="field">
+      <p>氏名          <%= @customer.last_name %><%= @customer.first_name %></p><br>
+    </div>
+    <div class="field">
+      <p>フリガナ          <%= @customer.last_name_kana %><%= @customer.first_name_kana %></p><br>
+    </div>
+    <div class="field">
+      <p>郵便番号          <%= @customer.postal_code %></p><br>
+    </div>
+    <div class="field">
+      <p>住所         <%= @customer.address %></p><br>
+    </div>
+		<div class="field">
+      <p>電話番号         <%= @customer.telephone_number %></p><br>
+    </div>
+    <div class="field">
+      <p>メールアドレス         <%= @customer.email %></p><br>
+    </div>
+    <div class="field">
+		  <p>会員ステータス
+		  <% if @customer.is_active == true%>
+		  <p>有効</p>
+		  <% else %>
+		  <p>退会済</p>
+		  <% end %></p>
+		</div>
+		<%= link_to "編集する", edit_admins_customer_path(@customer), class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
+  </div>
+</div>
