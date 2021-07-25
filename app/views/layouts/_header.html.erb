@@ -1,0 +1,37 @@
+<header>
+  <div class="container">
+    <nav>
+      <ul class="navbar">
+        <% if customer_signed_in? %>
+          <!--カスタマーがログインしている時 -->
+          <li>
+            ようこそ、<%= current_customer.last_name + current_customer.first_name %>さん！
+          </li>
+          <li><%= link_to "マイページ", customers_customer_path(current_customer) %></li>
+          <li><%= link_to "商品一覧", customers_items_path %></li>
+          <li><%= link_to "カート", customers_cart_items_path %></li>
+          <li><%= link_to "About", customers_about_path %></li>
+          <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
+
+        <% elsif admin_signed_in? %>
+
+          <!-- 管理者がログインしている時 -->
+          <li><%= link_to "商品一覧", admins_items_path %></li>
+          <li><%= link_to "会員一覧", admins_customers_path %></li>
+          <li><%= link_to "注文履歴一覧", admins_order_path %></li>
+          <li><%= link_to "ジャンル一覧", admins_genres_path %></li>
+          <li><%= link_to "About", customers_about_path %></li>
+          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+
+        <% else %>
+
+          <!-- ログインしていない時 -->
+          <li><%= link_to "商品一覧", customers_item_path %></li>
+          <li><%= link_to "新規登録", new_customer_registration_path %></li>
+          <li><%= link_to "About", customers_about_path %></li>
+          <li><%= link_to "ログイン", new_customer_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

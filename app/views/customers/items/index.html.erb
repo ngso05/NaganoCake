@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2>商品一覧
-    <span>全<%= @items_count %>件</span>
+    <span>全<%= @items.count %>件</span>
     </h2>
 
     <% @items.each do |item| %>
@@ -9,7 +9,7 @@
     <%= attachment_image_tag item, :image, size: "150x150",  fallback: "no-image.jpg"%><br>
     <% end %>
     <p><%= item.name %></p>
-    <p><%= (item.price*1.1).to_s(:delimited, delimiter: ",") %></p>
+    <p>¥<%= (item.price*1.1).round.to_s(:delimited, delimiter: ",") %></p>
     <% end %>
   </div>
 </div>

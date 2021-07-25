@@ -13,7 +13,7 @@
       <p>ジャンル          <%= @item.genre.name %></p><br>
     </div>
     <div class="field">
-      <p>税込価格          <%= (@item.price*1.1).to_s(:delimited, delimiter: ",") %>(<%= @item.price.to_s(:delimited, delimiter: ",") %>) 円<br>
+      <p>税込価格          <%= (@item.price*1.1).round.to_s(:delimited, delimiter: ",") %>(<%= @item.price.to_s(:delimited, delimiter: ",") %>) 円<br>
          (税抜価格)
       </p><br>
 		</div>

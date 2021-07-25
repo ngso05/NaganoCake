@@ -13,8 +13,11 @@ class Admins::CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-    @customer.update(customer_params)
-    redirect_to admins_customer_path
+    if @customer.update(customer_params)
+      redirect_to admins_customer_path
+    else
+      render :edit
+    end
   end
 
   private

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
    resources :items, only: [:new, :create, :index, :show, :edit, :update]
    resources :genres, only: [:create, :index, :edit, :update]
    resources :customers, only: [:show, :index, :edit, :update]
+   resources :orders, only: [:show, :update]
 
    root :to => 'homes#top'
   end
@@ -29,8 +30,9 @@ Rails.application.routes.draw do
     patch 'withdraw' => 'customers#withdraw'
     get 'unsubscribe' => 'customers#unsubscribe'
     resources :orders, only: [:show, :new, :index, :create]
-    get 'thanks' => 'customers#thanks'
-    post 'confirm' => 'customers#confirm'
+    get 'thanks' => 'orders#thanks'
+    post 'confirm' => 'orders#confirm'
+    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
 
     root :to => 'homes#top'
     get 'about' => 'homes#about'

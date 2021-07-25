@@ -3,22 +3,21 @@
   <div id="img_field">
     <%= attachment_image_tag(@item, :image, size: "300x220", fallback: "no-image.jpg") %>
     <div class="field">
-      <p>商品名          <%= @item.name %></p><br>
+      <p><%= @item.name %></p><br>
     </div>
     <div class="field">
-      <p>商品説明          <%= @item.introduction %></p><br>
+      <p><%= @item.introduction %></p><br>
     </div>
     <div class="field">
-      <p>税込価格          ¥<%= (@item.price*1.1).to_s(:delimited, delimiter: ",") %>(税込)</p><br>
+      <p>¥<%= (@item.price*1.1.round).to_s(:delimited, delimiter: ",") %>(税込)</p><br>
 		</div>
-		<%= form_with model: [:customers, @item], local:true do |f| %>
 		<div class="field">
-		  <%= f.label :amount, "数量" %>
-      <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10], include_blank: "個数選択" %>
-      </div>
+		<%= form_with(model: @cart_item, url: customers_cart_items_path, method: :post, local: true) do |f| %>
+		<%= f.select :amount, options_for_select((1..10).to_a) %>
+		<%= f.hidden_field :item_id, :value => @item.id %>
+		<%= f.submit "カートに入れる" %>
+		</div>
     <% end %>
-
-		<%= link_to "カートに入れる", customers_cart_items_path(@cartitem), class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
   </div>
 </div>
 

@@ -1,0 +1,16 @@
+<div class="container">
+  <dinv class="row">
+    <h2>注文情報入力</h2>
+    <%= form_with model: @order, url: customers_orders_path, method: :post, local:true do |f| %>
+
+    <div class="payment_method_field">
+      <p>支払い方法</p>
+      <%= f.radio_button :payment_method, :クレジットカード %>
+      <%= f.label :payment_method, 'クレジットカード' %>
+      <%= f.radio_button :payment_method, :銀行振込 %>
+      <%= f.label :payment_method, '銀行振込' %>
+      </div>
+      <%= f.submit "確認画面へ進む", class: "btn btn-success col-xs-5" %>
+    <% end %>
+  </dinv>
+</div>
