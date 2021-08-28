@@ -1,6 +1,6 @@
 class Customers::AddressesController < ApplicationController
   def index
-    @addresses = current_customer.addresses.page(params[:page])
+    @addresses = current_customer.addresses
     @address = Address.new
   end
 
@@ -10,7 +10,7 @@ class Customers::AddressesController < ApplicationController
     if @address.save
       redirect_to customers_addresses_path
     else
-      render :new
+      render :index
     end
   end
 

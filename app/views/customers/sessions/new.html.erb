@@ -1,5 +1,6 @@
 <div class="container">
   <h2>ログイン</h2>
+  <%= flash[:error] %>
 
   <%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
   <div class="field">

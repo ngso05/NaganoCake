@@ -9,8 +9,24 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+
+  <% if customer_signed_in? %>
   <body>
-    <% if customer_signed_in? %>
+    <div class="header">
+      <%= render "layouts/header" %>
+    </div>
+    <%= yield %>
+  </body>
+
+  <% elsif admin_signed_in? %>
+  <body>
+    <div class="header">
+      <%= render "layouts/header" %>
+    </div>
+    <%= yield %>
+  </body>
+  <% else %>
+  <body>
     <div class="header">
       <%= render "layouts/header" %>
     </div>

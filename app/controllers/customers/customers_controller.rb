@@ -8,7 +8,7 @@ class Customers::CustomersController < ApplicationController
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     if @customer.update(customer_params)
       redirect_to customers_customer_path
     else
@@ -16,15 +16,19 @@ class Customers::CustomersController < ApplicationController
     end
   end
 
+  # 退会確認
   def unsubscribe
-
   end
 
+  # 退会処理
   def withdraw
-    @customer = Customer.find(params[:id])
-    @customer.update(is_active: "退会")
-    reset_session
-    redirect_to root_path
+    @customer = current_customer
+    if @customer.update(is_active: "退会")
+      reset_session
+      redirect_to customers_root_path
+    else
+      render 'edit'
+    end
   end
 
   private

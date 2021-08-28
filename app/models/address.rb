@@ -1,6 +1,8 @@
 class Address < ApplicationRecord
   belongs_to :customer
-  validates :postal_code, length: {is: 7}, numericality: { only_integer: true }, presence: true
-  validates :address, presence: true
-  validates :name, presence: true
+  validates :postal_code, :address, :name, presence: true
+
+  def full_address
+    self.postal_code + self.address + self.name
+  end
 end

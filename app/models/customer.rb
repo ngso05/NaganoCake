@@ -2,9 +2,10 @@ class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   enum is_active: { 有効: true, 退会: false }
-  def active_for_authentication?
-        super && (self.is_active === "有効")
-  end
+  #def active_for_authentication?
+        #super && (self.is_active === false)
+  #end
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -19,4 +20,9 @@ class Customer < ApplicationRecord
          validates :telephone_number, presence: true
          validates :postal_code,  presence: true
          validates :address, presence: true
+
+         def active_for_authentication?
+           super && (self.is_active == "有効")
+         end
 end
+

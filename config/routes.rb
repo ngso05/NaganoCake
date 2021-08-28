@@ -11,6 +11,7 @@ Rails.application.routes.draw do
    resources :genres, only: [:create, :index, :edit, :update]
    resources :customers, only: [:show, :index, :edit, :update]
    resources :orders, only: [:show, :update]
+   resources :order_details, only: [:update]
 
    root :to => 'homes#top'
   end
@@ -25,17 +26,26 @@ Rails.application.routes.draw do
   namespace :customers do
     resources :items, only: [:show, :index]
     resources :cart_items, only: [:create, :index, :update, :destroy]
-    delete 'cart_items' => 'cart_items#all_destroy', as: 'all_destroy'
-    resources :customers, only: [:show, :edit, :update]
-    patch 'withdraw' => 'customers#withdraw'
-    get 'unsubscribe' => 'customers#unsubscribe'
-    resources :orders, only: [:show, :new, :index, :create]
-    get 'thanks' => 'orders#thanks'
-    post 'confirm' => 'orders#confirm'
+    delete 'cart_items/destroy_all' => 'cart_items#all_destroy'
+    resources :customers, only: [:show, :edit, :update] do
+      collection do
+        get 'withdraw'
+        patch 'withdraw'
+        get 'unsubscribe'
+      end
+    end
+    post 'orders/confirm' => 'orders/confirm'
+    resources :orders, only: [:show, :new, :index, :create] do
+      collection do
+        get 'thanks'
+        get 'confirm'
+      end
+    end
+
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
 
     root :to => 'homes#top'
-    get 'about' => 'homes#about'
+    get 'homes/about' => 'homes#about'
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -24,12 +24,9 @@
     </div>
     <div class="field">
 		  <p>会員ステータス</p>
-		  <% if @customer.is_active == true%>
-		  <p>有効</p>
-		  <% else %>
-		  <p>退会済</p>
-		  <% end %></p>
+		  <%= @customer.is_active %>
 		</div>
 		<%= link_to "編集する", edit_admins_customer_path(@customer), class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
+		<%= link_to "注文一覧を見る", admins_order_path(@customer), class: "btn btn-success" %>
   </div>
 </div>

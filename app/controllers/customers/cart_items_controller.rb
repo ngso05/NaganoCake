@@ -29,6 +29,9 @@ class Customers::CartItemsController < ApplicationController
   end
 
   def all_destroy
+    @cart_items = current_customer.cart_items
+		@cart_items.destroy_all
+		redirect_to customers_cart_items_path
   end
   private
 

@@ -10,11 +10,18 @@
     </tr>
   </thead>
   <tbody>
+    <% @orders.each do |order| %>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>
+        <%= link_to admins_order_path(order), data: {"turbolinks" => false}, :style=>"color:#528fff;"  do %>
+        <%= order.created_at %>
+        <% end %>
+      </td>
+      <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+      <td><%= order.order_details.count %></td>
+      <td><%= order.order_status %></td>
     </tr>
+    <% end %>
   </tbody>
 </table>
+<%= paginate @orders %>
